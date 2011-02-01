@@ -1,0 +1,22 @@
+defaults: &defaults
+  host: localhost
+  # slaves:
+  #   - host: slave1.local
+  #     port: 27018
+  #   - host: slave2.local
+  #     port: 27019
+
+development:
+  <<: *defaults
+  database: uploader_development
+
+test:
+  <<: *defaults
+  database: uploader_test
+
+# set these environment variables on your prod server
+production:
+  <<: *defaults
+  # username: <%= ENV['MONGOID_USERNAME'] %>
+  # password: <%= ENV['MONGOID_PASSWORD'] %>
+  database: uploader_prod
