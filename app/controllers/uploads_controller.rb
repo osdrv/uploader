@@ -4,8 +4,8 @@ class UploadsController < ApplicationController
 
   def create
     @upload = Upload.create(params[:upload])
-    Rails.logger.debug(@upload.file.url)
-    render :text => @upload.file.url
+    Rails.logger.debug(@upload.file.url(:original, false))
+    render :text => @upload.file.url(:original, false)
   end
 
   def show
