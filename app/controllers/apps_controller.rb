@@ -5,12 +5,13 @@ class AppsController < ApplicationController
   def create
     username = params[:username]
     hostname = request.host_with_port
-    system "echo \"#{username}\" > client/auc_bundle.app/Contents/Resources/username.name"
-    system "echo \"#{hostname}\" > client/auc_bundle.app/Contents/Resources/hostname.name"
-    system "tar -cf #{username}_app.tar client/auc_bundle.app/"
-    system "rm client/auc_bundle.app/Contents/Resources/username.name"
-    system "rm client/auc_bundle.app/Contents/Resources/hostname.name"
-    Rails.logger.debug("#{RAILS_ROOT}/#{username}_app.tar")
-    send_file "#{RAILS_ROOT}/#{username}_app.tar", :filename => "bundle.tar"
+    Dir.chdir(Rails.root.to_s) do
+      system "echo \"#{username}\" > client/auc_bundle.app/Contents/Resources/username.name"
+      system "echo \"#{hostname}\" > client/auc_bundle.app/Contents/Resources/hostname.name"
+      system "tar -cf #{username}_app.tar client/auc_bundle.app/"
+      system "rm client/auc_bundle.app/Contents/Resources/username.name"
+      system "rm client/auc_bundle.app/Contents/Resources/hostname.name"
+      send_file "#{Rails.root.to_s}/#{username}_app.tar", :filename => "bundle.tar"
+    end
   end
 end
