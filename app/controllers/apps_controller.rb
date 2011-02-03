@@ -10,6 +10,7 @@ class AppsController < ApplicationController
     system "tar -cf #{username}_app.tar client/auc_bundle.app/"
     system "rm client/auc_bundle.app/Contents/Resources/username.name"
     system "rm client/auc_bundle.app/Contents/Resources/hostname.name"
-    send_file "#{username}_app.tar", :filename => "bundle.tar"
+    Rails.logger.debug("#{RAILS_ROOT}/#{username}_app.tar")
+    send_file "#{RAILS_ROOT}/#{username}_app.tar", :filename => "bundle.tar"
   end
 end
