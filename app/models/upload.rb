@@ -1,3 +1,7 @@
+Paperclip.interpolates :partial_id do |a, s|
+  a.instance._id.to_s[0, 5]
+end
+
 class Upload
   include Mongoid::Document
   include Mongoid::Paperclip
@@ -9,5 +13,5 @@ class Upload
   field :file_type
   field :file_updated_at, :type => DateTime
 
-  has_attached_file :file, :path => ":rails_root/public/i/:id/:filename", :url => "/i/:id/:filename"
+  has_mongoid_attached_file :file, :path => ":rails_root/public/i/:partial_id/:filename", :url => "/i/:partial_id/:filename"
 end
