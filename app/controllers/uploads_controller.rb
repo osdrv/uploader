@@ -9,6 +9,6 @@ class UploadsController < ApplicationController
   end
 
   def show
-    render :text => "Loading"
+    render :text => "The snapshot is not ready yet pr was removed permanently.", :status => 422
   end
 end

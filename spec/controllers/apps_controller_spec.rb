@@ -3,6 +3,14 @@
 require 'spec_helper'
 
 describe AppsController do
+
+  describe 'при запросе заглавной страницы' do
+    it 'должен возвращать 200й ответ' do
+      get :index
+      response.should be_success
+    end
+  end
+
   describe 'при запросе страницы с формой' do
     it 'должен отдавать 200й ответ' do
       get :new
@@ -28,7 +36,7 @@ describe AppsController do
     end
 
     it 'должен возвращать приложение в виде tar-архива' do
-      puts response.content_type.should eq 'application/x-tar'
+      response.content_type.should eq 'application/x-tar'
     end
 
     it 'должен создавать приложение в папке :root/' do
