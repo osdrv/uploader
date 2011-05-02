@@ -1,5 +1,4 @@
 require 'erb'
-require 'sinatra'
 
 require File.join(File.dirname(__FILE__), 'config', 'config.rb')
 require File.join(File.dirname(__FILE__), 'config', 'boot.rb')
@@ -27,8 +26,9 @@ post '/new' do
     app = UserApp.new(:username => username, :host => host)
     app.create_user_app!
     raise 'fuck...' if !app.created?
-    send_file app.file, :type => 'application/x-tar'
+    send_file File.new(app.file), :type => 'application/x-tar', :filename => File.basename(app.file)
   rescue => e
+    # raise e
     halt 417, 'Application requested could not being created.'
   end
 end

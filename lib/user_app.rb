@@ -6,28 +6,30 @@ class UserApp
   end
 
   def create_user_app!
-    system "cp -r #{settings.root_dir}/client/uploader.app #{get_file_path}"
-    system "echo \"#{@username}\" > #{get_file_path}/Contents/Resources/username.name"
-    system "echo \"#{@hostname}\" > #{get_file_path}/Contents/Resources/hostname.name"
-    system "tar -cf #{get_archive_path} #{get_file_path}"
-    system "rm -r #{get_file_path}"
+    system "cp -r #{settings.root_dir}/client/uploader.app #{settings.tmp_dir}/#{get_file_path}"
+    system "echo \"#{@username}\" > #{settings.tmp_dir}/#{get_file_path}/Contents/Resources/username.name"
+    system "echo \"#{@hostname}\" > #{settings.tmp_dir}/#{get_file_path}/Contents/Resources/hostname.name"
+    Dir.chdir(settings.tmp_dir) do
+      system "tar -cf #{get_archive_path} #{get_file_path}"
+      system "rm -r #{get_file_path}"
+    end
   end
 
   def created?
-    File.exist?(get_archive_path)
+    File.exist?(file)
   end
 
   def file
-    File.new(get_archive_path)
+    "#{settings.tmp_dir}/#{get_archive_path}"
   end
 
 protected
 
   def get_file_path
-    "#{settings.tmp_dir}/#{@username}.app"
+    "#{@username}.app"
   end
 
   def get_archive_path
-    "#{settings.tmp_dir}/#{@username}_app.tar"
+    "#{@username}_app.tar"
   end
 end
