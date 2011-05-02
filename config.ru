@@ -1,4 +1,8 @@
-# This file is used by Rack-based servers to start the application.
+require 'sinatra'
 
-require ::File.expand_path('../config/environment',  __FILE__)
-run Uploader::Application
+set :environment, ENV['RACK_ENV']
+disable :run
+
+require File.join(File.dirname(__FILE__), 'app')
+
+run Sinatra::Application

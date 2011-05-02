@@ -8,15 +8,13 @@ defaults: &defaults
 
 development:
   <<: *defaults
-  database: uploader_development
+  database: uploader2_development
 
 test:
   <<: *defaults
-  database: uploader_test
+  database: uploader2_test
+  logging: false
 
-# set these environment variables on your prod server
 production:
   <<: *defaults
-  # username: <%= ENV['MONGOID_USERNAME'] %>
-  # password: <%= ENV['MONGOID_PASSWORD'] %>
-  database: uploader_prod
+  database: uploader2_prod
