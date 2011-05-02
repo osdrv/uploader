@@ -38,5 +38,10 @@ describe UploadsController do
       uploaded_file_path = File.join(root, 'public', response.body.to_s)
       File.exist?(uploaded_file_path).should be_true
     end
+
+    it 'должна создаваться запись в базе' do
+      filename = response.body.to_s
+      Upload.last.file_file_name.should eq File.basename(filename)
+    end
   end
 end
