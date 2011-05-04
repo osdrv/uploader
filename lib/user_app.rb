@@ -26,7 +26,7 @@ class UserApp
 protected
 
   def get_file_path
-    "#{@username}_uploader.app"
+    "uploader.app"
   end
 
   def get_archive_path
