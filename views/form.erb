@@ -2,8 +2,18 @@
   input.text { border: 1px solid lightblue; border-radius: 7px; outline-style:none; padding: 3px; }
 </style>
 
-<form action="/new" method="POST" enctype="multipart/form-data">
+<form id='username-form' action="/new" method="POST" enctype="multipart/form-data">
   <label for="username">Username:</label>
   <input type="text" name="username" value="" id="username" class="text">
   <input type="submit" value="Download" />
 </form>
+
+<script type="text/javascript" charset="utf-8">
+  document.getElementById('username-form').onsubmit = function() {
+    var username = document.getElementById('username').value
+    if ((username.length == 0) || (!username.match(/^[\w]+$/))) {
+      alert('Username given is not valid. Only latin letters or digits are allowed.')
+      return false
+    }
+  }
+</script>
