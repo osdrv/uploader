@@ -36,8 +36,8 @@ describe 'загрузка изображений' do
     it 'названия файлов до и после загрузки должны совпадать' do
       start_basename = File.basename(upload_file)
       new_file_path = last_response.body.to_s
-      final_basename = File.basename(new_file_path)
-      start_basename.should eq final_basename
+      final_basename = Base62.to_s(Time.now.to_i) + File.extname(start_basename)
+      File.basename(new_file_path).should eq final_basename
       uploaded_file_path = File.join(root, 'public', new_file_path)
     end
 
@@ -48,7 +48,7 @@ describe 'загрузка изображений' do
 
     it 'должна создаваться запись в базе' do
       filename = last_response.body.to_s
-      Upload.last.original_name.should eq File.basename(filename)
+      Upload.last.short_name.should eq File.basename(filename)
     end
   end
 end

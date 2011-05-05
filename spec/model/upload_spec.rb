@@ -17,7 +17,7 @@ describe 'загрузка изображения' do
 
     it 'должен создавать подпапку на основе id новой сущности' do
       upload = Upload.create({ :file => File.new(upload_file), :original_name => File.basename(upload_file) })
-      upload.original_name.should eq File.basename(upload_file)
+      upload.short_name.should eq (Base62.to_s(Time.now.to_i) + File.extname(upload_file))
       file_path = upload.file.url(:original, false)
       File.exist?(File.join(root, 'public', file_path)).should be_true
       File.dirname(file_path).should eq "/i/#{Digest::SHA1.hexdigest(upload._id.to_s)[0, 2]}"

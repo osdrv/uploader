@@ -10,11 +10,22 @@ class Upload
   field :file_height, :type => Integer
   field :file_type
   field :file_updated_at, :type => DateTime
-  field :original_name
+  field :short_name
 
-  validates_presence_of :file_file_name, :original_name
+  validates_presence_of :file_file_name, :short_name
 
-  has_mongoid_attached_file :file, :path => "#{settings.public_dir}/i/:sharded_id/:original_name", :url => "/i/:sharded_id/:original_name"
-  Paperclip.interpolates :sharded_id do |a, s| Digest::SHA1.hexdigest(a.instance._id.to_s)[0, 2]; end
-  Paperclip.interpolates :original_name do |a, s| a.instance.original_name; end
+  has_mongoid_attached_file :file, :path => "#{settings.public_dir}/i/:sharded_id/:short_name", :url => "/i/:sharded_id/:short_name"
+
+  Paperclip.interpolates :sharded_id do |a, s|
+    Digest::SHA1.hexdigest(a.instance._id.to_s)[0, 2]
+  end
+
+  Paperclip.interpolates :short_name do |a, s|
+    a.instance.short_name
+  end
+
+  def original_name=(name)
+    self.short_name = Base62.to_s(Time.now.to_i) + File.extname(name)
+  end
+
 end
