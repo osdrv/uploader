@@ -10,4 +10,5 @@ group :test, :development do
   gem 'rspec'
   gem 'autotest'
   gem 'webrat'
+  gem 'capistrano'
 end
