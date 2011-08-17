@@ -5,6 +5,7 @@ gem 'mongoid', '~>2.0.1'
 gem 'bson', '~>1.3.0'
 gem 'bson_ext', '~>1.3.0'
 gem 'mongoid-paperclip', :require => 'mongoid_paperclip'
+gem "unicorn"
 
 group :test, :development do
   gem 'rspec'
