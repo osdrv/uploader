@@ -10,6 +10,8 @@
 	<string>applet</string>
 	<key>CFBundleIconFile</key>
 	<string>applet</string>
+	<key>CFBundleIdentifier</key>
+	<string>com.apple.ScriptEditor.id.A959AAE0-308C-4D9B-B582-BDEA214A872D</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
@@ -31,7 +33,7 @@
 		<key>positionOfDivider</key>
 		<real>449</real>
 		<key>savedFrame</key>
-		<string>65 102 1188 676 0 0 1280 778 </string>
+		<string>35 102 1188 676 0 0 1280 778 </string>
 		<key>selectedTabView</key>
 		<string>event log</string>
 	</dict>
